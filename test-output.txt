@@ -1,0 +1,45 @@
+
+ RUN  v2.1.9 .
+
+ ✓ tests/silent.test.ts > request race when switching runs quickly > a slow response for run A cannot overwrite the fast response for run B
+ ✓ tests/silent.test.ts > request race when switching runs quickly > a late error from an old request is not shown either
+ ✓ tests/silent.test.ts > request race when switching runs quickly > 30 rapid switches: only the last one is delivered
+ ✓ tests/silent.test.ts > request race when switching runs quickly > after cancel (leaving the page) nothing is delivered
+ ✓ tests/silent.test.ts > stale data > a running run fetched more than a minute ago is flagged
+ ✓ tests/silent.test.ts > stale data > a finished run does not go stale
+ ✓ tests/silent.test.ts > stale data > "running" with no new step for 30+ minutes is flagged as silent
+ ✓ tests/silent.test.ts > locale and time zone > times are printed in UTC and say so
+ ✓ tests/silent.test.ts > locale and time zone > numbers use one fixed notation, whatever the browser locale is
+ ✓ tests/silent.test.ts > locale and time zone > relative time
+ ✓ tests/silent.test.ts > smoothing that hides divergence > on the oscillating run the smoothed line stays flat while raw swings widen; the axis follows raw
+ ✓ tests/silent.test.ts > sorting the run list with NaN in the column > NaN and missing values go last in both directions and the order is stable
+ ✓ tests/silent.test.ts > sorting the run list with NaN in the column > control: the naive comparator leaves the list in a wrong order
+ ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > the generated run really has 1,000,000 points and one spike
+ ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > reaches the exact spike value on screen for 5 widths x 7 zoom spans x 5 positions 686ms
+ ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > still reaches it with smoothing on and on a log axis
+ ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > control: the usual "take every Nth point" decimation loses the spike
+ ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > control: averaging per pixel shrinks the spike to almost nothing
+ ✓ tests/truth.test.ts > 2. NaN and Infinity are never drawn as a number and never bridged > a NaN in the middle splits the line and takes no y position
+ ✓ tests/truth.test.ts > 2. NaN and Infinity are never drawn as a number and never bridged > +Infinity and -Infinity are handled the same way and do not blow up the axis
+ ✓ tests/truth.test.ts > 2. NaN and Infinity are never drawn as a number and never bridged > a lone finite point between NaNs is still drawn (as a dot)
+ ✓ tests/truth.test.ts > 2. NaN and Infinity are never drawn as a number and never bridged > NaN inside a crowded pixel column is still flagged when zoomed all the way out
+ ✓ tests/truth.test.ts > 2. NaN and Infinity are never drawn as a number and never bridged > smoothing does not paper over NaN: the smoothed series is NaN at exactly the same rows
+ ✓ tests/truth.test.ts > 2. NaN and Infinity are never drawn as a number and never bridged > a run that ends in NaN reports NaN as its current loss, not the last good number
+ ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > shuffled rows give exactly the same picture as sorted rows
+ ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > the line never goes backwards: steps are strictly increasing after normalize, for all 20 runs
+ ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > for a duplicated step the last written row wins, and the report says how many were replaced
+ ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > the block-shuffled run matches the dumb reference too
+ ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > a gap breaks the line instead of drawing a straight segment across missing steps
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > every bucket min/max equals a brute-force scan, and no row is lost (200 random windows)
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > summary cards equal an independent calculation, for all 20 runs 531ms
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > tick labels read back as the tick value and sit at the right pixel
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > tick labels keep enough digits when the range is tiny compared to the values
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > formatValue never rounds a number into a different-looking one
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > log axis: zeros are counted and marked, not dropped and not drawn at some made-up position
+ ✓ tests/truth.test.ts > 5. log axis is labelled over its whole height > run-13 on a log axis has tick labels below 1, where the run actually is
+
+ Test Files  2 passed (2)
+      Tests  36 passed (36)
+   Start at  20:54:21
+   Duration  3.10s (transform 191ms, setup 0ms, collect 280ms, tests 2.65s, environment 0ms, prepare 345ms)
+

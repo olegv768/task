@@ -1,0 +1,83 @@
+{
+  "browser": "msedge 157.0.4341.42",
+  "cpuThrottling": 4,
+  "viewport": "1280x800",
+  "run": "run-08 (1,000,000 points)",
+  "runsPerMode": 3,
+  "naive": {
+    "firstRenderMs": 4073.8,
+    "hoverMedianMs": 2871.9,
+    "hoverMaxMs": 6123.2,
+    "zoomMedianMs": 772.5,
+    "zoomMaxMs": 3172.9,
+    "jsHeapMB": 79.9,
+    "typedArrayMB": 0.2
+  },
+  "naiveSamples": [
+    {
+      "firstRenderMs": 4391.8,
+      "hoverMedianMs": 2866.8,
+      "hoverMaxMs": 5938.5,
+      "zoomMedianMs": 792,
+      "zoomMaxMs": 3172.9,
+      "jsHeapMB": 80,
+      "typedArrayMB": 0.2
+    },
+    {
+      "firstRenderMs": 4073.8,
+      "hoverMedianMs": 2871.9,
+      "hoverMaxMs": 6981.6,
+      "zoomMedianMs": 613.9,
+      "zoomMaxMs": 2893.4,
+      "jsHeapMB": 79.9,
+      "typedArrayMB": 0.2
+    },
+    {
+      "firstRenderMs": 3585.9,
+      "hoverMedianMs": 3156.6,
+      "hoverMaxMs": 6123.2,
+      "zoomMedianMs": 772.5,
+      "zoomMaxMs": 3556.6,
+      "jsHeapMB": 79.9,
+      "typedArrayMB": 0.2
+    }
+  ],
+  "optimized": {
+    "firstRenderMs": 1552.9,
+    "hoverMedianMs": 17.4,
+    "hoverMaxMs": 42.2,
+    "zoomMedianMs": 74,
+    "zoomMaxMs": 233.1,
+    "jsHeapMB": 3.7,
+    "typedArrayMB": 31
+  },
+  "optimizedSamples": [
+    {
+      "firstRenderMs": 1699.8,
+      "hoverMedianMs": 18.4,
+      "hoverMaxMs": 48.4,
+      "zoomMedianMs": 74,
+      "zoomMaxMs": 244.1,
+      "jsHeapMB": 3.8,
+      "typedArrayMB": 31
+    },
+    {
+      "firstRenderMs": 1552.9,
+      "hoverMedianMs": 17.4,
+      "hoverMaxMs": 36.5,
+      "zoomMedianMs": 75.4,
+      "zoomMaxMs": 233.1,
+      "jsHeapMB": 3.7,
+      "typedArrayMB": 31
+    },
+    {
+      "firstRenderMs": 1429.6,
+      "hoverMedianMs": 16.7,
+      "hoverMaxMs": 42.2,
+      "zoomMedianMs": 65.2,
+      "zoomMaxMs": 218.8,
+      "jsHeapMB": 3.7,
+      "typedArrayMB": 31
+    }
+  ]
+}
