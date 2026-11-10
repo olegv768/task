@@ -14,7 +14,7 @@ question — can this chart be shown to someone deciding whether to stop a $500 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm test           # 36 tests, about 3 s
+npm test           # 39 tests, about 3 s
 npm run build
 npm run perf       # needs Edge or Chrome installed; rewrites perf/
 ```

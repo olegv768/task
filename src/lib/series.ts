@@ -11,6 +11,14 @@ export function normalize(raw: RawRun): NormalizedRun {
   const s = raw.steps
   const n = s.length
 
+  // A shorter column would read as undefined and be stored as NaN, i.e. the
+  // chart would show "the model produced NaN" for what is a broken file.
+  if (raw.loss.length !== n || raw.lr.length !== n || raw.grad_norm.length !== n) {
+    throw new Error(
+      `Malformed run: ${n} steps but ${raw.loss.length} loss, ${raw.lr.length} lr and ${raw.grad_norm.length} grad_norm values`,
+    )
+  }
+
   let clean = true
   for (let i = 0; i < n; i++) {
     if (!Number.isFinite(s[i]) || (i > 0 && !(s[i] > s[i - 1]))) {
@@ -51,25 +59,27 @@ export function normalize(raw: RawRun): NormalizedRun {
   const keep: number[] = []
   let duplicates = 0
   let conflicting = 0
-  for (let k = 0; k < idx.length; k++) {
-    const i = idx[k]
-    const isLastOfGroup = k === idx.length - 1 || s[idx[k + 1]] !== s[i]
-    if (isLastOfGroup) {
-      keep.push(i)
-      continue
+  // One pass over groups of equal steps. An earlier version looked for the end
+  // of the group again for every row in it, which is quadratic: 80,000 rows
+  // with the same step took 4 seconds.
+  let k = 0
+  while (k < idx.length) {
+    let end = k
+    while (end + 1 < idx.length && s[idx[end + 1]] === s[idx[k]]) end++
+    const w = idx[end]
+    keep.push(w)
+    for (let j = k; j < end; j++) {
+      const i = idx[j]
+      duplicates++
+      if (
+        !same(raw.loss[i], raw.loss[w]) ||
+        !same(raw.lr[i], raw.lr[w]) ||
+        !same(raw.grad_norm[i], raw.grad_norm[w])
+      ) {
+        conflicting++
+      }
     }
-    duplicates++
-    // find the row that will be kept for this step to see if values disagree
-    let j = k + 1
-    while (j < idx.length - 1 && s[idx[j + 1]] === s[i]) j++
-    const w = idx[j]
-    if (
-      !same(raw.loss[i], raw.loss[w]) ||
-      !same(raw.lr[i], raw.lr[w]) ||
-      !same(raw.grad_norm[i], raw.grad_norm[w])
-    ) {
-      conflicting++
-    }
+    k = end + 1
   }
 
   const m = keep.length

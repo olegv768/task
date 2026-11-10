@@ -15,7 +15,7 @@
  ✓ tests/silent.test.ts > sorting the run list with NaN in the column > NaN and missing values go last in both directions and the order is stable
  ✓ tests/silent.test.ts > sorting the run list with NaN in the column > control: the naive comparator leaves the list in a wrong order
  ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > the generated run really has 1,000,000 points and one spike
- ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > reaches the exact spike value on screen for 5 widths x 7 zoom spans x 5 positions 686ms
+ ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > reaches the exact spike value on screen for 5 widths x 7 zoom spans x 5 positions 675ms
  ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > still reaches it with smoothing on and on a log axis
  ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > control: the usual "take every Nth point" decimation loses the spike
  ✓ tests/truth.test.ts > 1. the spike is visible at every zoom level > control: averaging per pixel shrinks the spike to almost nothing
@@ -31,15 +31,18 @@
  ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > the block-shuffled run matches the dumb reference too
  ✓ tests/truth.test.ts > 3. duplicates and unsorted steps do not distort the line > a gap breaks the line instead of drawing a straight segment across missing steps
  ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > every bucket min/max equals a brute-force scan, and no row is lost (200 random windows)
- ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > summary cards equal an independent calculation, for all 20 runs 531ms
+ ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > summary cards equal an independent calculation, for all 20 runs 573ms
  ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > tick labels read back as the tick value and sit at the right pixel
  ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > tick labels keep enough digits when the range is tiny compared to the values
  ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > formatValue never rounds a number into a different-looking one
  ✓ tests/truth.test.ts > 4. numbers and axis labels match the data > log axis: zeros are counted and marked, not dropped and not drawn at some made-up position
  ✓ tests/truth.test.ts > 5. log axis is labelled over its whole height > run-13 on a log axis has tick labels below 1, where the run actually is
+ ✓ tests/truth.test.ts > 6. found in code review > many rows with the same step are handled in linear time and the last one still wins
+ ✓ tests/truth.test.ts > 6. found in code review > columns of different length are rejected instead of being padded with NaN
+ ✓ tests/truth.test.ts > 6. found in code review > known limit: a NaN between two values inside one pixel column cannot break the line, but is flagged
 
  Test Files  2 passed (2)
-      Tests  36 passed (36)
-   Start at  20:54:21
-   Duration  3.10s (transform 191ms, setup 0ms, collect 280ms, tests 2.65s, environment 0ms, prepare 345ms)
+      Tests  39 passed (39)
+   Start at  21:12:45
+   Duration  3.23s (transform 169ms, setup 0ms, collect 255ms, tests 2.82s, environment 0ms, prepare 326ms)
 

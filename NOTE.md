@@ -15,7 +15,7 @@ The chart I would trust. The page around it I would not give to someone about to
 Nothing is averaged, so a one-point spike is the max of its column at any zoom. Lost: the order of points inside a
 column. The readout says so ("960 points in this pixel: min 0.236, max 48").
 
-36 tests, all pass (`test-output.txt`):
+39 tests, all pass (`test-output.txt`):
 
 - **Spike**: 175 combinations of width × zoom × position reach the exact pixel of the value 48. Controls show
   "every Nth point" and per-pixel averaging both lose it.
@@ -83,7 +83,14 @@ into English from what happened to me in this work.
   does not confirm the table above. It shows what the script never measured: a 1,135 ms task that freezes the list
   page, about 730 ms of it generating all 20 runs to fill the columns.
 
-**Not done by me:** a trace of run-08 itself, a line-by-line code review, a non-English locale check.
+- Reviewed the data code (`downsample`, `normalize`, `ema`, the draw list, zoom) and wrote up 9 remarks. The
+  assistant ran each one. Two were real and are fixed with tests: de-duplication was quadratic (80,000 rows with
+  one step took 4.2 s, now 16 ms), and columns of different length were silently padded with NaN. One I called
+  critical was wrong: the first-min-max-last order inside a column cannot invent a trajectory, because all four
+  points share one x. One is a real limit, kept and pinned by a test: a NaN between two values inside one pixel
+  column cannot break the line; it is only flagged red.
+
+**Not done by me:** a trace of run-08 itself, a review of the UI components, a non-English locale check.
 
 ## 5. What surprised me, what still concerns me
 

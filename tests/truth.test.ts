@@ -396,3 +396,38 @@ describe('5. log axis is labelled over its whole height', () => {
     for (const t of m.yTicks) expect(Number(t.label)).toBe(t.v)
   })
 })
+
+describe('6. found in code review', () => {
+  it('many rows with the same step are handled in linear time and the last one still wins', () => {
+    const n = 300_000
+    const raw: RawRun = {
+      steps: new Float64Array(n).fill(7),
+      loss: Float64Array.from({ length: n }, (_, i) => i),
+      lr: new Float64Array(n),
+      grad_norm: new Float64Array(n),
+    }
+    const t = performance.now()
+    const run = normalize(raw)
+    const ms = performance.now() - t
+    expect(run.steps.length).toBe(1)
+    expect(run.loss[0]).toBe(n - 1)
+    expect(run.report.duplicates).toBe(n - 1)
+    expect(run.report.conflictingDuplicates).toBe(n - 1)
+    // the quadratic version needed about a minute for this
+    expect(ms).toBeLessThan(2000)
+  })
+
+  it('columns of different length are rejected instead of being padded with NaN', () => {
+    const raw: RawRun = { steps: f64([0, 1, 2]), loss: f64([1, 1, 1]), lr: f64([1, 1]), grad_norm: f64([1, 1, 1]) }
+    expect(() => normalize(raw)).toThrow(/Malformed run/)
+  })
+
+  it('known limit: a NaN between two values inside one pixel column cannot break the line, but is flagged', () => {
+    const steps = f64([0, 1, 2, 3, 4, 5, 6, 7, 8])
+    const values = f64([5, 5, 5, 1, NaN, 9, 5, 5, 5])
+    const m = buildModel({ steps, values, smoothed: null, x0: 0, x1: 8, plotW: 3, plotH: 100, log: false, gapThreshold: Infinity })
+    expect(m.raw.badCols).toEqual([1])
+    expect(m.buckets.min[1]).toBe(1)
+    expect(m.buckets.max[1]).toBe(9)
+  })
+})
