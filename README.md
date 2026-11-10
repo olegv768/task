@@ -3,7 +3,8 @@
 Take-home task for the Soup internship (Frontend Engineer): a monitor for 20 training runs, built to answer one
 question — can this chart be shown to someone deciding whether to stop a $500 run?
 
-- Deployed: _add link_
+- Deployed: https://task-eight-pied.vercel.app
+- Repository: https://github.com/olegv768/task
 - Note (truthfulness, performance, silent failures, verdict, AI use): [NOTE.md](NOTE.md)
 - Test output: [test-output.txt](test-output.txt)
 - Performance numbers and traces: [perf/](perf/)
